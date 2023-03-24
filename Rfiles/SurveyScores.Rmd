@@ -1,0 +1,178 @@
+---
+title: "Test Scores"
+author: "Odalys Barrientos"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+```{r}
+getwd()
+library(readr)
+Survey <- read_csv("~/Documents/MonmouthUniversity/MA321-FA21/MehrkamProject/Data/SurveyOutcomes.csv")
+MehrkamData <- read_csv("~/Documents/MonmouthUniversity/MA321-FA21/MehrkamProject/Data/Mehrkam-CleanData.csv")
+#Survey$AnimalType <- impactDis.nohouse$AnimalType[1:391]
+#Survey$Vingette<- impactDis.nohouse$AnimalType[1:391]
+```
+# Pre Scores 
+```{r}
+PreScores <- vector()
+for(i in 1:391){
+PreScores[i]<- sum(Survey[i,3:17])/(7*15)
+}
+#PreScores
+
+```
+
+# Post Scores
+```{r}
+PostScores <- vector()
+for(i in 1:391){
+PostScores[i]<- sum(Survey[i,18:32])/(7*15)
+}
+#PostScores
+
+
+```
+
+```{r}
+library(mosaic)
+favstats(PreScores)
+favstats(PostScores)
+
+
+```
+
+
+```{r}
+boxplot(PreScores, PostScores ,names=c("Pre Scores", "Post Scores"), main="Boxplot of Pre & Post Test Scores", ylab="Test Score")
+
+densityplot(PreScores)
+densityplot(PostScores)
+
+difference <- (PreScores - PostScores)
+Survey$Diff <- difference
+par(mfrow=c(2,1))
+densityplot(difference)
+densityplot(PreScores)
+
+Survey$PreScores <- PreScores
+
+gf_qq(PreScores, data=Survey) %>% gf_qqline()
+densityplot(~difference|Vignette, data = Survey)
+
+
+boot.t.test(PreScores, PostScores,
+       alternative = "two.sided",
+       mu = 0, paired = TRUE, var.equal = FALSE,
+       conf.level = 0.95, R = 9999, symmetric = FALSE)
+
+```
+
+```{r}
+library(mosaic)
+Survey$PreScores <- PreScores
+Survey$PostScores <- PostScores
+Survey$DiffScores <- PreScores-PostScores
+
+
+Survey$AnimalType <- c(rep("Seal/Sea Lion",length.out=80),rep("Sea Turtle",length.out=83),rep("Sea Bird",length.out=76), rep("Ocean",length.out=79), rep("Household Items",length.out=73))
+Survey$Vignette <- c(rep("V1",length.out=38),rep("V2",length.out=43),rep("V1",length.out=38),rep("V2",length.out=44),rep("V1",length.out=38),rep("V2",length.out=38), rep("V1",length.out=39), rep("V2",length.out=41),rep("V1",length.out=35),rep("V2",length.out=37))
+
+favstats(~PreScores|Conditions, data=Survey)
+favstats(~PostScores|Conditions, data=Survey)
+
+animal <-favstats(~DiffScores|Conditions, data=Survey)
+favstats(~DiffScores|AnimalType, data=Survey)
+data.frame(Interaction = animal$Conditions, meanDiff = animal$mean)
+favstats(~DiffScores|Vignette, data=Survey)
+
+Survey$Behavior <- MehrkamData$Behavior_CleanUp
+
+
+```
+
+
+```{r}
+xchisq.test(Survey$Behavior,Survey$AnimalType,  simulate.p.value = FALSE)
+xchisq.test(Survey$Behavior,Survey$Vignette, simulate.p.value = FALSE)
+xchisq.test(Survey$Behavior, simulate.p.value = TRUE)
+
+
+tally(Behavior~AnimalType, format = "percent", data = Survey)
+tally(Behavior, format = "percent", data = Survey)
+tally(Survey$Behavior, format = "percent")
+
+```
+
+
+
+```{r}
+library(ggpubr)
+
+Survey$AnimalType <- as.factor(Survey$AnimalType)
+Survey$Vignette <- as.factor(Survey$Vignette)
+
+
+ggline(Survey, x = "AnimalType", y = "DiffScores", add="mean_se", ylab ="Difference in Scores")
+ggline(Survey, x = "Vignette", y = "DiffScores", add="mean_se")
+ggline(Survey, x = "Vignette", y = "DiffScores", col="AnimalType",add="mean_se")
+
+ggline(Survey, col = "Vignette", y = "DiffScores", x="AnimalType",add="mean_se")
+
+```
+
+```{r}
+Survey$Empowerment <- MehrkamData$Vignette
+
+favstats(~Empowerment|Vignette, data = Survey)
+
+xchisq.test(~Empowerment|Vignette, data=Survey)
+```
+```{r}
+library(MKinfer)
+
+boot.t.test(PreScores, PostScores,
+       alternative = "two.sided",
+       mu = 0, paired = TRUE, var.equal = FALSE,
+       conf.level = 0.95, R = 9999, symmetric = FALSE)
+
+```
+
+```{r}
+library(lmboot)
+aov.scores <- aov(DiffScores ~ AnimalType + Vignette + Vignette*AnimalType , data = Survey) # ANOVA assuming normality
+summary(aov.scores)
+
+library(car)
+Anova(aov.scores)
+
+plot(aov.scores) # Looking to see if we met the noramllity assumptions by ploting the residuals
+
+###### BOOT #######
+aov.scoresBOOT <- ANOVA.boot(DiffScores ~ AnimalType + Vignette + Vignette*AnimalType , B = 1000, data = Survey)
+
+aov.scoresBOOT$`p-values` # Extracting pvalues
+# first pval : AnimalType 
+# second pval : Vignette
+# third pval : interaction
+```
+
+```{r}
+#install.packages("psych")
+library(psych)
+# Q1-Q5 Attitudes Toward Recycling (Onel & Mukherjee, 2017)
+# Q6-8 Ascription of Responsibility (Onel & Mukherjee, 2017)
+# Q9-Q15 Sacrifice of Convenience/Ease (Douglass & Mehrkam, Present Study)
+psych::alpha(Survey[,3:32])
+# Pre
+psych::alpha(Survey[,3:7])
+psych::alpha(Survey[,8:10])
+psych::alpha(Survey[,11:17])
+# Post
+psych::alpha(Survey[,18:22])
+psych::alpha(Survey[,23:25])
+psych::alpha(Survey[,26:32])
+
+```
+

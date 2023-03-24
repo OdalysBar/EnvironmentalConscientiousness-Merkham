@@ -1,0 +1,164 @@
+---
+title: "MA321 Mehrkam Project: Descriptives"
+output: html_notebook
+---
+
+```{r}
+library(readxl)
+Amazon <- read_excel("Data/July7Amazon.xlsx")
+#View(Amazon)
+```
+
+```{r}
+tally( Amazon$Participant_Gender )
+
+Amazon$Participant_Gender[which(Amazon$Participant_Gender=="nonbinary")] <- NA
+tally( Amazon$Participant_Gender )
+
+Amazon$Participant_Age[which(Amazon$Participant_Age=="seal")] <- NA
+tally( Amazon$Participant_Age )
+
+#Amazon
+#write.csv(Amazon, file="Mehrkam-CleanData.csv")
+
+Mehrkam_CleanData <- read_csv("Data/Mehrkam-CleanData.csv")
+#View(Mehrkam_CleanData)
+```
+
+```{r}
+impactData <- data.frame(Distress1 = Mehrkam_CleanData$Image1,Natural1= Mehrkam_CleanData$Image2, Distress2 = Mehrkam_CleanData$Image3,Natural2 = Mehrkam_CleanData$Image4,Distress3 = Mehrkam_CleanData$Image5,Natural3=Mehrkam_CleanData$Image6,Distress4 = Mehrkam_CleanData$Image7, Natural4=Mehrkam_CleanData$Image8)
+
+```
+
+```{r}
+library(mosaic)
+Distress <- c(1,3,5,7)
+Natural <- c(2,4,6,8)
+
+DistLevel <- vector()
+NatLevel <- vector()
+for(i in 1:391){
+dis <- favstats(impactData[i,Distress])
+DistLevel[i] <- dis$mean
+
+nat <- favstats(impactData[i, Natural])
+NatLevel[i] <- nat$mean
+}
+
+impactLevel <- data.frame(Distress = DistLevel, Natural = NatLevel)
+
+```
+
+```{r}
+# All Data
+boxplot(impactLevel$Distress, impactLevel$Natural, names = c("Distress", "Natural"))
+
+# No House
+boxplot(impactLevel$Distress[1:319], impactLevel$Natural[1:319],names = c("Distress", "Natural"))
+```
+
+
+```{r}
+impactDis <- data.frame(impactlevel = c(impactLevel$Distress, impactLevel$Natural), pic.type = c(rep("Distress", length.out=391), rep("Natural", length.out=391)))
+
+# No House Data
+impactDis.nohouse <- data.frame(impactlevel = c(impactLevel$Distress[1:319], impactLevel$Natural[1:319]), pic.type = c(rep("Distress", length.out=319), rep("Natural", length.out=319)))
+
+impactDis.nohouse$AnimalType <- c(rep("Seal/Sea Lion",length.out=81),rep("Sea Turtle",length.out=83),rep("Sea Bird",length.out=76), rep("zOcean",length.out=79), rep("Seal/Sea Lion",length.out=81),rep("Sea Turtle",length.out=83),rep("Sea Bird",length.out=76), rep("zOcean",length.out=79))
+
+impactDis.nohouse$pic.type <- as.factor(impactDis.nohouse$pic.type)
+impactDis.nohouse$AnimalType <- as.factor(impactDis.nohouse$AnimalType)
+```
+
+# All Data
+```{r}
+gf_qq(~impactlevel|pic.type, data =impactDis) %>% gf_qqline()
+
+densityplot(~impactlevel|pic.type, data =impactDis)
+```
+# No House Descriptives
+```{r}
+gf_qq(~impactlevel|pic.type, data =impactDis.nohouse) %>% gf_qqline()
+
+gf_density(~impactlevel|pic.type, data =impactDis.nohouse)
+densityplot(~impactlevel|pic.type, data =impactDis.nohouse)
+```
+
+# Favstats
+```{r}
+favstats(~impactlevel|pic.type, data =impactDis)
+
+favstats(~impactlevel|pic.type, data =impactDis.nohouse)
+```
+
+
+# Means Plot
+```{r}
+library(ggpubr)
+
+ggline(impactDis.nohouse, x = "AnimalType", y = "impactlevel", add="mean_se")
+ggline(impactDis.nohouse, x = "pic.type", y = "impactlevel", add="mean_se")
+
+ggline(impactDis.nohouse, x = "AnimalType", y = "impactlevel", col="pic.type",add="mean_se")
+```
+
+
+
+```{r}
+#install.packages("lme4")
+
+library(lme4)
+library(nlme)
+
+
+
+mixed.model <- lmer(impactlevel ~ factor + AnimalType + factor*AnimalType + (1|subject), data = impactDis.nohouse)
+mixed.model
+
+
+summary(mixed.model)
+
+
+Anova(mixed.model, type = "III")
+```
+
+
+
+
+```{r}
+mixed.model1<-lme(impactlevel~AnimalType+ pic.type+AnimalType*pic.type,random=~1|subject,data=impactDis.nohouse)
+mixed.model1
+
+summary(mixed.model1)
+
+Anova(mixed.model1, type="III")
+
+```
+
+```{r}
+impactDis.nohouse$subject <- c(1:319)
+
+contrasts(impactDis.nohouse$AnimalType) <- contr.sum(4)
+contrasts(impactDis.nohouse$AnimalType) 
+contrasts(impactDis.nohouse$pic.type) <- contr.sum(2)
+contrasts(impactDis.nohouse$pic.type)
+
+mixed.model1<-lme(impactlevel~AnimalType*pic.type,random=~1|subject,data=impactDis.nohouse)
+mixed.model1
+
+summary(mixed.model1)
+
+library(car)
+Anova(mixed.model1, type="III")
+
+plot(mixed.model1)
+
+```
+
+```{r}
+getit <- read.csv("https://baseballsavant.mlb.com/leaderboard/home-runs")
+head(getit)
+
+```
+
+

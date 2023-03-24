@@ -1,0 +1,507 @@
+---
+title: "Pre-Post Questions: Mehrkam Project"
+author: Odalys Barrientos
+output: html_notebook
+---
+
+```{r}
+library(readr)
+MehrkamData <- read_csv("~/Documents/MA321-FA21/MehrkamProject/Data/Mehrkam-CleanData.csv")
+
+#View(MehrkamData)
+
+```
+
+# Reverse Code: Pre 1
+```{r}
+Pre1 <- vector()
+
+for(i in 1:length(MehrkamData$Pre_Q1)){
+  if(MehrkamData$Pre_Q1[i] == 7){
+  Pre1[i] <- 1
+}
+  if(MehrkamData$Pre_Q1[i] == 6){
+  Pre1[i] <- 2
+}
+  if(MehrkamData$Pre_Q1[i] == 5){
+  Pre1[i] <- 3
+}
+  if(MehrkamData$Pre_Q1[i] == 3){
+  Pre1[i] <- 5
+}
+  if(MehrkamData$Pre_Q1[i] == 2){
+  Pre1[i] <- 6
+}
+  if(MehrkamData$Pre_Q1[i] == 1){
+  Pre1[i] <- 7
+  }
+  if(MehrkamData$Pre_Q1[i] == 4){
+  Pre1[i] <- 4
+  }
+  }
+Pre1
+```
+
+
+# Reverse Code: Pre 2
+```{r}
+Pre2 <- vector()
+
+for(i in 1:length(MehrkamData$Pre_Q2)){
+  if(MehrkamData$Pre_Q2[i] == 7){
+  Pre2[i] <- 1
+}
+  if(MehrkamData$Pre_Q2[i] == 6){
+  Pre2[i] <- 2
+}
+  if(MehrkamData$Pre_Q2[i] == 5){
+  Pre2[i] <- 3
+}
+  if(MehrkamData$Pre_Q2[i] == 3){
+  Pre2[i] <- 5
+}
+  if(MehrkamData$Pre_Q2[i] == 2){
+  Pre2[i] <- 6
+}
+  if(MehrkamData$Pre_Q2[i] == 1){
+  Pre2[i] <- 7
+  }
+  if(MehrkamData$Pre_Q2[i] == 4){
+  Pre2[i] <- 4
+  }
+  }
+Pre2
+```
+
+# Reverse Code: Pre 3
+```{r}
+Pre3 <- vector()
+
+for(i in 1:length(MehrkamData$Pre_Q3)){
+  if(MehrkamData$Pre_Q3[i] == 7){
+  Pre3[i] <- 1
+}
+  if(MehrkamData$Pre_Q3[i] == 6){
+  Pre3[i] <- 2
+}
+  if(MehrkamData$Pre_Q3[i] == 5){
+  Pre3[i] <- 3
+}
+  if(MehrkamData$Pre_Q3[i] == 3){
+  Pre3[i] <- 5
+}
+  if(MehrkamData$Pre_Q3[i] == 2){
+  Pre3[i] <- 6
+}
+  if(MehrkamData$Pre_Q3[i] == 1){
+  Pre3[i] <- 7
+  }
+  if(MehrkamData$Pre_Q3[i] == 4){
+  Pre3[i] <- 4
+  }
+  }
+Pre3
+```
+
+# Reverse Code: Pre 9
+```{r}
+Pre9 <- vector()
+
+for(i in 1:length(MehrkamData$Pre_Q9)){
+  if(MehrkamData$Pre_Q9[i] == 7){
+  Pre9[i] <- 1
+}
+  if(MehrkamData$Pre_Q9[i] == 6){
+  Pre9[i] <- 2
+}
+  if(MehrkamData$Pre_Q9[i] == 5){
+  Pre9[i] <- 3
+}
+  if(MehrkamData$Pre_Q9[i] == 3){
+  Pre9[i] <- 5
+}
+  if(MehrkamData$Pre_Q9[i] == 2){
+  Pre9[i] <- 6
+}
+  if(MehrkamData$Pre_Q9[i] == 1){
+  Pre9[i] <- 7
+  }
+  if(MehrkamData$Pre_Q9[i] == 4){
+  Pre9[i] <- 4
+  }
+  }
+Pre9
+```
+# Reverse Code: Pre 10
+```{r}
+Pre10 <- vector()
+
+for(i in 1:length(MehrkamData$Pre_Q10)){
+  if(MehrkamData$Pre_Q10[i] == 7){
+  Pre10[i] <- 1
+}
+  if(MehrkamData$Pre_Q10[i] == 6){
+  Pre10[i] <- 2
+}
+  if(MehrkamData$Pre_Q10[i] == 5){
+  Pre10[i] <- 3
+}
+  if(MehrkamData$Pre_Q10[i] == 3){
+  Pre10[i] <- 5
+}
+  if(MehrkamData$Pre_Q10[i] == 2){
+  Pre10[i] <- 6
+}
+  if(MehrkamData$Pre_Q10[i] == 1){
+  Pre10[i] <- 7
+  }
+  if(MehrkamData$Pre_Q10[i] == 4){
+  Pre10[i] <- 4
+  }
+  }
+Pre10
+```
+
+# Reverse Code: Pre 11
+```{r}
+Pre11 <- vector()
+
+for(i in 1:length(MehrkamData$Pre_Q11)){
+  if(MehrkamData$Pre_Q11[i] == 7){
+  Pre11[i] <- 1
+}
+  if(MehrkamData$Pre_Q11[i] == 6){
+  Pre11[i] <- 2
+}
+  if(MehrkamData$Pre_Q11[i] == 5){
+  Pre11[i] <- 3
+}
+  if(MehrkamData$Pre_Q11[i] == 3){
+  Pre11[i] <- 5
+}
+  if(MehrkamData$Pre_Q11[i] == 2){
+  Pre11[i] <- 6
+}
+  if(MehrkamData$Pre_Q11[i] == 1){
+  Pre11[i] <- 7
+  }
+  if(MehrkamData$Pre_Q11[i] == 4){
+  Pre11[i] <- 4
+  }
+  }
+Pre11
+```
+
+# Reverse Code: Pre 13
+```{r}
+Pre13 <- vector()
+
+for(i in 1:length(MehrkamData$Pre_Q13)){
+  if(MehrkamData$Pre_Q13[i] == 7){
+  Pre13[i] <- 1
+}
+  if(MehrkamData$Pre_Q13[i] == 6){
+  Pre13[i] <- 2
+}
+  if(MehrkamData$Pre_Q13[i] == 5){
+  Pre13[i] <- 3
+}
+  if(MehrkamData$Pre_Q13[i] == 3){
+  Pre13[i] <- 5
+}
+  if(MehrkamData$Pre_Q13[i] == 2){
+  Pre13[i] <- 6
+}
+  if(MehrkamData$Pre_Q13[i] == 1){
+  Pre13[i] <- 7
+  }
+  if(MehrkamData$Pre_Q13[i] == 4){
+  Pre13[i] <- 4
+  }
+  }
+Pre13
+```
+
+# Reverse Code: Pre 14
+```{r}
+Pre14 <- vector()
+
+for(i in 1:length(MehrkamData$Pre_Q14)){
+  if(MehrkamData$Pre_Q14[i] == 7){
+  Pre14[i] <- 1
+}
+  if(MehrkamData$Pre_Q14[i] == 6){
+  Pre14[i] <- 2
+}
+  if(MehrkamData$Pre_Q14[i] == 5){
+  Pre14[i] <- 3
+}
+  if(MehrkamData$Pre_Q14[i] == 3){
+  Pre14[i] <- 5
+}
+  if(MehrkamData$Pre_Q14[i] == 2){
+  Pre14[i] <- 6
+}
+  if(MehrkamData$Pre_Q14[i] == 1){
+  Pre14[i] <- 7
+  }
+  if(MehrkamData$Pre_Q14[i] == 4){
+  Pre14[i] <- 4
+  }
+  }
+Pre14
+```
+
+
+# Reverse Code: Post 1
+```{r}
+Post8 <- vector()
+
+for(i in 1:length(MehrkamData$Post_Q1)){
+  if(MehrkamData$Post_Q1[i] == 7){
+  Post8[i] <- 1
+}
+  if(MehrkamData$Post_Q1[i] == 6){
+  Post8[i] <- 2
+}
+  if(MehrkamData$Post_Q1[i] == 5){
+  Post8[i] <- 3
+}
+  if(MehrkamData$Post_Q1[i] == 3){
+  Post8[i] <- 5
+}
+  if(MehrkamData$Post_Q1[i] == 2){
+  Post8[i] <- 6
+}
+  if(MehrkamData$Post_Q1[i] == 1){
+  Post8[i] <- 7
+  }
+  if(MehrkamData$Post_Q1[i] == 4){
+  Post8[i] <- 4
+  }
+  }
+Post8
+```
+
+# Reverse Code: Post 2
+```{r}
+Post15 <- vector()
+
+for(i in 1:length(MehrkamData$Post_Q2)){
+  if(MehrkamData$Post_Q2[i] == 7){
+  Post15[i] <- 1
+}
+  if(MehrkamData$Post_Q2[i] == 6){
+  Post15[i] <- 2
+}
+  if(MehrkamData$Post_Q2[i] == 5){
+  Post15[i] <- 3
+}
+  if(MehrkamData$Post_Q2[i] == 3){
+  Post15[i] <- 5
+}
+  if(MehrkamData$Post_Q2[i] == 2){
+  Post15[i] <- 6
+}
+  if(MehrkamData$Post_Q2[i] == 1){
+  Post15[i] <- 7
+  }
+  if(MehrkamData$Post_Q2[i] == 4){
+  Post15[i] <- 4
+  }
+  }
+Post15
+```
+
+# Reverse Code: Post 3
+```{r}
+Post1 <- MehrkamData$Post_Q3
+
+Post1
+```
+
+# Reverse Code: Post 4
+```{r}
+Post6 <- vector()
+
+for(i in 1:length(MehrkamData$Post_Q4)){
+  if(MehrkamData$Post_Q4[i] == 7){
+  Post6[i] <- 1
+}
+  if(MehrkamData$Post_Q4[i] == 6){
+  Post6[i] <- 2
+}
+  if(MehrkamData$Post_Q4[i] == 5){
+  Post6[i] <- 3
+}
+  if(MehrkamData$Post_Q4[i] == 3){
+  Post6[i] <- 5
+}
+  if(MehrkamData$Post_Q4[i] == 2){
+  Post6[i] <- 6
+}
+  if(MehrkamData$Post_Q4[i] == 1){
+  Post6[i] <- 7
+  }
+  if(MehrkamData$Post_Q4[i] == 4){
+  Post6[i] <- 4
+  }
+  }
+Post6
+```
+
+# Reverse Code: Post 5
+```{r}
+Post12 <- MehrkamData$Post_Q5
+
+Post12
+```
+
+# Reverse Code: Post 6
+```{r}
+Post13 <- MehrkamData$Post_Q6
+
+Post13
+```
+
+# Reverse Code: Post 7
+```{r}
+Post4 <- MehrkamData$Post_Q7
+
+Post4
+```
+
+# Reverse Code: Post 8
+```{r}
+Post10 <- MehrkamData$Post_Q8
+
+Post10
+```
+# Reverse Code: Post 9
+```{r}
+Post2 <- MehrkamData$Post_Q9
+
+Post2
+```
+
+# Reverse Code: Post 10
+```{r}
+Post5 <- vector()
+
+for(i in 1:length(MehrkamData$Post_Q10)){
+  if(MehrkamData$Post_Q10[i] >= 7){
+  Post5[i] <- 1
+}
+  if(MehrkamData$Post_Q10[i] == 6){
+  Post5[i] <- 2
+}
+  if(MehrkamData$Post_Q10[i] == 5){
+  Post5[i] <- 3
+}
+  if(MehrkamData$Post_Q10[i] == 3){
+  Post5[i] <- 5
+}
+  if(MehrkamData$Post_Q10[i] == 2){
+  Post5[i] <- 6
+}
+  if(MehrkamData$Post_Q10[i] == 1){
+  Post5[i] <- 7
+  }
+  if(MehrkamData$Post_Q10[i] == 4){
+  Post5[i] <- 4
+  }
+  }
+Post5
+```
+# Reverse Code: Post 11
+```{r}
+Post9 <- MehrkamData$Post_Q11
+
+Post9
+```
+
+# Reverse Code: Post 12
+```{r}
+Post7 <- vector()
+
+for(i in 1:length(MehrkamData$Post_Q12)){
+  if(MehrkamData$Post_Q12[i] >= 7){
+  Post7[i] <- 1
+}
+  if(MehrkamData$Post_Q12[i] == 6){
+  Post7[i] <- 2
+}
+  if(MehrkamData$Post_Q12[i] == 5){
+  Post7[i] <- 3
+}
+  if(MehrkamData$Post_Q12[i] == 3){
+  Post7[i] <- 5
+}
+  if(MehrkamData$Post_Q12[i] == 2){
+  Post7[i] <- 6
+}
+  if(MehrkamData$Post_Q12[i] == 1){
+  Post7[i] <- 7
+  }
+  if(MehrkamData$Post_Q12[i] == 4){
+  Post7[i] <- 4
+  }
+  }
+Post7
+```
+# Reverse Code: Post 13
+```{r}
+Post3 <- MehrkamData$Post_Q13
+
+Post3
+```
+
+
+
+# Reverse Code: Post 14
+```{r}
+Post11 <- vector()
+
+for(i in 1:length(MehrkamData$Post_Q14)){
+  if(MehrkamData$Post_Q14[i] >= 7){
+  Post11[i] <- 1
+}
+  if(MehrkamData$Post_Q14[i] == 6){
+  Post11[i] <- 2
+}
+  if(MehrkamData$Post_Q14[i] == 5){
+  Post11[i] <- 3
+}
+  if(MehrkamData$Post_Q14[i] == 3){
+  Post11[i] <- 5
+}
+  if(MehrkamData$Post_Q14[i] == 2){
+  Post11[i] <- 6
+}
+  if(MehrkamData$Post_Q14[i] == 1){
+  Post11[i] <- 7
+  }
+  if(MehrkamData$Post_Q14[i] == 4){
+  Post11[i] <- 4
+  }
+  }
+Post11
+```
+
+# Reverse Code: Post 15
+```{r}
+Post14 <- MehrkamData$Post_Q15
+
+Post14
+```
+
+# NEW DATA
+```{r}
+SurveyOutcomes <- data.frame(Conditions = MehrkamData$Condition, Pre1 = Pre1, Pre2 =Pre2, Pre3 =Pre3, Pre4 =MehrkamData$Pre_Q4, Pre5 = MehrkamData$Pre_Q5, Pre6 = MehrkamData$Pre_Q6, Pre7 = MehrkamData$Pre_Q7, Pre8 = MehrkamData$Pre_Q8, Pre9 =Pre9, Pre10 = Pre10, Pre11 = Pre11, Pre12 = MehrkamData$Pre_Q12, Pre13 = Pre13, Pre14 = Pre14, Pre15 = MehrkamData$Pre_Q15, Post1, Post2, Post3,Post4, Post5, Post6, Post7, Post8, Post9, Post10,Post11, Post12, Post13, Post14, Post15 )
+
+#View(SurveyOutcomes)
+
+#write.csv(SurveyOutcomes, "SurveyOutcomes.csv" )
+
+```
+
